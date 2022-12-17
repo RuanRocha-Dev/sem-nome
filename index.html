@@ -586,7 +586,15 @@
     }
 
     #itensComanda{
-        margin-top: 14rem;
+        margin-top: -12rem;
+        margin-left: 14px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 63%;
+    }
+    
+    #comandaProdutos{
+        margin-top: -12rem;
         margin-left: 14px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -749,18 +757,64 @@
         font-size: .7rem;
     }
 
-    .filtroCategorias {
-        top: 80vh;
-        left: 20vw;
+    .menuNotificacoes {
+        width: 18%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: .3s;
+        align-items: center;
+        background-color: var(--corPrimaria);
+        margin-left: 99.6rem;
         position: absolute;
-        background-color: red;
+        z-index: 1;
+        margin-top: 45px;
     }
 
-    .iconeFiltro {
-        border-radius: 50%;
-        padding: 1rem;
-        background-color: aquamarine;
+    .headerMenuNotificacoes {
+        width: 100%;
+        height: 3%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
     }
+    
+    .headerMenuNotificacoes i{
+        color: black;
+        position: absolute;
+        left: 10%;
+        cursor: pointer;
+    }
+
+    .itensNotificacoes {
+        padding: 10px 8px 10px 8px;
+        margin: 0;
+        width: 100%;
+        height: 78%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .itensNotificacoes li {
+        position: absolute;
+        list-style: none;
+        width: 292px;
+        height: 100px;
+        left: 8px;
+        top: 95px;
+        background: #FFFFFF;
+        border: 0.5px solid #031C30;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.21);
+        border-radius: 8px;
+    }
+
+    .d-none{
+        display: none;
+    }
+
 </style>
 
 <body>
@@ -780,11 +834,11 @@
                 </div>
             </div>
             <ul class="itensMenu"> <!-- itens e subitens do menu --> 
-                <li>
+                <li onclick="abreFechaNotificacao();">
                     <i class="fa fa-bell"></i>
                     <p> Notificação </p>
                 </li>
-                <li>
+                <li onclick="chamarFuncao('convite');">
                     <i class="fa fa-envelope-open"></i>
                     <p> Convite </p>
                 </li>
@@ -800,7 +854,7 @@
                     <i class="fa fa-star"></i>
                     <p> Resgatar Prêmios </p>
                 </li>
-                <li>
+                <li onclick="chamarFuncao('resgateBeneficios');">
                     <i class="fa fa-trophy"></i>
                     <p> Resgatar Beneficios </p>
                 </li>
@@ -828,6 +882,124 @@
                 </button>
             </footer>
         </section>
+        <section id="sectionNotificacao" class="menuNotificacoes d-none">
+            <div class="headerMenuNotificacoes">  <!-- cabeçalho do menu -->
+                <i class="fa fa-xmark" style=" color: black; position: absolute; cursor: pointer; left: 4.53%; right: 90.94%; font-size: 22px; top: 4.34%; bottom: 93.77%;" onclick="abreFechaNotificacao()"></i>
+                <div>
+                    <h2 style="margin-top: 5rem; margin-left: -30px;"><strong style="color: #031C30 ;">Notificação</strong></h2>
+                </div>
+            </div>
+            <ul class="itensNotificacoes"> <!-- notificações --> 
+                <li>
+                    <div style="display: flex; flex-direction: row;">
+                        <div style="position: absolute; width: 50px; height: 50px; left: 13px; top: 25px; background: #F5F5F5; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; display: flex; align-items: center;">
+                            <svg style="margin-left: 14px;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.50001 10.5001H12C12.2652 10.5001 12.5196 10.3947 12.7071 10.2072C12.8947 10.0196 13 9.76528 13 9.50007C13 9.23485 12.8947 8.9805 12.7071 8.79296C12.5196 8.60543 12.2652 8.50007 12 8.50007H11V8.00007C11 7.73485 10.8947 7.4805 10.7071 7.29296C10.5196 7.10543 10.2652 7.00007 10 7.00007C9.73479 7.00007 9.48044 7.10543 9.2929 7.29296C9.10537 7.4805 9.00001 7.73485 9.00001 8.00007V8.55007C8.39243 8.67344 7.85237 9.01817 7.48466 9.51733C7.11696 10.0165 6.94785 10.6345 7.01015 11.2513C7.07246 11.8682 7.36174 12.4398 7.82184 12.8554C8.28194 13.2709 8.88003 13.5007 9.50001 13.5001H10.5C10.6326 13.5001 10.7598 13.5527 10.8536 13.6465C10.9473 13.7403 11 13.8675 11 14.0001C11 14.1327 10.9473 14.2599 10.8536 14.3536C10.7598 14.4474 10.6326 14.5001 10.5 14.5001H8.00001C7.73479 14.5001 7.48044 14.6054 7.2929 14.793C7.10537 14.9805 7.00001 15.2349 7.00001 15.5001C7.00001 15.7653 7.10537 16.0196 7.2929 16.2072C7.48044 16.3947 7.73479 16.5001 8.00001 16.5001H9.00001V17.0001C9.00001 17.2653 9.10537 17.5196 9.2929 17.7072C9.48044 17.8947 9.73479 18.0001 10 18.0001C10.2652 18.0001 10.5196 17.8947 10.7071 17.7072C10.8947 17.5196 11 17.2653 11 17.0001V16.4501C11.6076 16.3267 12.1476 15.982 12.5154 15.4828C12.8831 14.9836 13.0522 14.3657 12.9899 13.7488C12.9276 13.132 12.6383 12.5603 12.1782 12.1448C11.7181 11.7292 11.12 11.4994 10.5 11.5001H9.50001C9.3674 11.5001 9.24022 11.4474 9.14645 11.3536C9.05269 11.2599 9.00001 11.1327 9.00001 11.0001C9.00001 10.8675 9.05269 10.7403 9.14645 10.6465C9.24022 10.5527 9.3674 10.5001 9.50001 10.5001ZM21 12.0001H18V3.00007C18.0007 2.82386 17.9548 2.65059 17.867 2.49781C17.7792 2.34504 17.6526 2.21817 17.5 2.13007C17.348 2.0423 17.1755 1.99609 17 1.99609C16.8245 1.99609 16.652 2.0423 16.5 2.13007L13.5 3.85007L10.5 2.13007C10.348 2.0423 10.1755 1.99609 10 1.99609C9.82447 1.99609 9.65203 2.0423 9.50001 2.13007L6.50001 3.85007L3.50001 2.13007C3.34799 2.0423 3.17554 1.99609 3.00001 1.99609C2.82447 1.99609 2.65203 2.0423 2.50001 2.13007C2.3474 2.21817 2.22079 2.34504 2.13299 2.49781C2.04518 2.65059 1.99931 2.82386 2.00001 3.00007V19.0001C2.00001 19.7957 2.31608 20.5588 2.87869 21.1214C3.4413 21.684 4.20436 22.0001 5.00001 22.0001H19C19.7957 22.0001 20.5587 21.684 21.1213 21.1214C21.6839 20.5588 22 19.7957 22 19.0001V13.0001C22 12.7349 21.8947 12.4805 21.7071 12.293C21.5196 12.1054 21.2652 12.0001 21 12.0001ZM5.00001 20.0001C4.73479 20.0001 4.48044 19.8947 4.2929 19.7072C4.10536 19.5196 4.00001 19.2653 4.00001 19.0001V4.73007L6.00001 5.87007C6.15435 5.95068 6.32589 5.99278 6.50001 5.99278C6.67413 5.99278 6.84567 5.95068 7.00001 5.87007L10 4.15007L13 5.87007C13.1543 5.95068 13.3259 5.99278 13.5 5.99278C13.6741 5.99278 13.8457 5.95068 14 5.87007L16 4.73007V19.0001C16.0027 19.3412 16.0636 19.6794 16.18 20.0001H5.00001ZM20 19.0001C20 19.2653 19.8947 19.5196 19.7071 19.7072C19.5196 19.8947 19.2652 20.0001 19 20.0001C18.7348 20.0001 18.4804 19.8947 18.2929 19.7072C18.1054 19.5196 18 19.2653 18 19.0001V14.0001H20V19.0001Z" fill="black"/>
+                                </svg>                                
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div id="txtValorNotificacoes" style="position: absolute; right: 41.49%; top: 6.9%; font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-size: 21.7143px; line-height: 26px; color: #000000;">
+                                <p><strong style="color: #000000;">R$ 98,99</strong></p>
+                            </div>
+                            <div style="position: absolute; height: 15px; right: 28.85%; top: calc(50% - 15px/2 + 9.39px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 10.8571px; line-height: 14px; color: #000000; overflow: hidden; text-overflow: ellipsis; max-width: 133px; white-space: nowrap; ">
+                                14 itens: 1x Coca  2x Açai 14 itens: 1x Coca  2x Açai 14 itens: 1x Coca  2x Açai 14 itens: 1x Coca  2x Açai 14 itens: 1x Coca  2x Açai
+                            </div>
+                            <div style="position: absolute; width: 76px; height: 13px; left: 73px; top: 71px; border: 1px solid #1B9C07; border-radius: 6.5px;">
+                                <div style="display: flex; flex-direction: row;  justify-content: space-around;">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.00006 0.833252C4.19193 0.834787 3.40168 1.0713 2.72557 1.51398C2.04947 1.95665 1.51668 2.58639 1.19212 3.32649C0.867555 4.06658 0.765218 4.88509 0.897572 5.68232C1.02993 6.47954 1.39126 7.22107 1.93756 7.81659C2.32774 8.23952 2.80129 8.57706 3.32837 8.80792C3.85545 9.03878 4.42464 9.15797 5.00006 9.15797C5.57549 9.15797 6.14467 9.03878 6.67175 8.80792C7.19884 8.57706 7.67239 8.23952 8.06256 7.81659C8.60886 7.22107 8.9702 6.47954 9.10255 5.68232C9.23491 4.88509 9.13257 4.06658 8.808 3.32649C8.48344 2.58639 7.95065 1.95665 7.27455 1.51398C6.59844 1.0713 5.8082 0.834787 5.00006 0.833252ZM5.00006 8.33325C4.13692 8.33194 3.30794 7.99587 2.68756 7.39575C2.87591 6.93723 3.19633 6.54504 3.60808 6.26904C4.01984 5.99303 4.50436 5.84567 5.00006 5.84567C5.49577 5.84567 5.98028 5.99303 6.39204 6.26904C6.8038 6.54504 7.12421 6.93723 7.31256 7.39575C6.69218 7.99587 5.8632 8.33194 5.00006 8.33325ZM4.16673 4.16659C4.16673 4.00177 4.2156 3.84065 4.30717 3.70361C4.39874 3.56657 4.52889 3.45976 4.68116 3.39669C4.83343 3.33361 5.00099 3.31711 5.16264 3.34926C5.32429 3.38142 5.47277 3.46079 5.58932 3.57733C5.70586 3.69387 5.78523 3.84236 5.81738 4.00401C5.84954 4.16566 5.83303 4.33322 5.76996 4.48549C5.70689 4.63776 5.60008 4.76791 5.46304 4.85948C5.326 4.95104 5.16488 4.99992 5.00006 4.99992C4.77905 4.99992 4.56709 4.91212 4.41081 4.75584C4.25453 4.59956 4.16673 4.3876 4.16673 4.16659ZM7.87923 6.66659C7.50695 6.02982 6.93398 5.53451 6.25006 5.25825C6.46221 5.01769 6.60045 4.72103 6.64817 4.40385C6.6959 4.08668 6.65109 3.76247 6.51912 3.47013C6.38716 3.17779 6.17364 2.92973 5.90419 2.75574C5.63474 2.58174 5.32081 2.48919 5.00006 2.48919C4.67932 2.48919 4.36538 2.58174 4.09593 2.75574C3.82648 2.92973 3.61297 3.17779 3.481 3.47013C3.34903 3.76247 3.30422 4.08668 3.35195 4.40385C3.39967 4.72103 3.53791 5.01769 3.75006 5.25825C3.06614 5.53451 2.49317 6.02982 2.12089 6.66659C1.8242 6.16121 1.66744 5.58595 1.66673 4.99992C1.66673 4.11586 2.01792 3.26802 2.64304 2.6429C3.26816 2.01777 4.11601 1.66659 5.00006 1.66659C5.88412 1.66659 6.73196 2.01777 7.35708 2.6429C7.98221 3.26802 8.3334 4.11586 8.3334 4.99992C8.33268 5.58595 8.17592 6.16121 7.87923 6.66659Z" fill="#1B9C07"/>
+                                    </svg>
+                                    <p style="height: 15px; margin-top: 0px; font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 6px; line-height: 14px; text-transform: uppercase; color: #1B9C07;">Paulo Machado</p>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div style="position: absolute; height: 20px; right: 3.3%; top: calc(50% - 20px/2 - 33px); font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-size: 14.6429px; line-height: 19px; color: #000000;">
+                                13:37
+                            </div>
+                            <div style="position: absolute; height: 10px; right: 3.3%; top: calc(50% - 10px/2 - 23px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 7.51931px; line-height: 10px; color: #000000;">
+                                26/07/2022
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li style="margin-top: 120px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <div style="position: absolute; width: 50px; height: 50px; left: 13px; top: 25px; background: #F5F5F5; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; display: flex; align-items: center;">
+                            <svg style="margin-left: 14px;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.50001 10.5001H12C12.2652 10.5001 12.5196 10.3947 12.7071 10.2072C12.8947 10.0196 13 9.76528 13 9.50007C13 9.23485 12.8947 8.9805 12.7071 8.79296C12.5196 8.60543 12.2652 8.50007 12 8.50007H11V8.00007C11 7.73485 10.8947 7.4805 10.7071 7.29296C10.5196 7.10543 10.2652 7.00007 10 7.00007C9.73479 7.00007 9.48044 7.10543 9.2929 7.29296C9.10537 7.4805 9.00001 7.73485 9.00001 8.00007V8.55007C8.39243 8.67344 7.85237 9.01817 7.48466 9.51733C7.11696 10.0165 6.94785 10.6345 7.01015 11.2513C7.07246 11.8682 7.36174 12.4398 7.82184 12.8554C8.28194 13.2709 8.88003 13.5007 9.50001 13.5001H10.5C10.6326 13.5001 10.7598 13.5527 10.8536 13.6465C10.9473 13.7403 11 13.8675 11 14.0001C11 14.1327 10.9473 14.2599 10.8536 14.3536C10.7598 14.4474 10.6326 14.5001 10.5 14.5001H8.00001C7.73479 14.5001 7.48044 14.6054 7.2929 14.793C7.10537 14.9805 7.00001 15.2349 7.00001 15.5001C7.00001 15.7653 7.10537 16.0196 7.2929 16.2072C7.48044 16.3947 7.73479 16.5001 8.00001 16.5001H9.00001V17.0001C9.00001 17.2653 9.10537 17.5196 9.2929 17.7072C9.48044 17.8947 9.73479 18.0001 10 18.0001C10.2652 18.0001 10.5196 17.8947 10.7071 17.7072C10.8947 17.5196 11 17.2653 11 17.0001V16.4501C11.6076 16.3267 12.1476 15.982 12.5154 15.4828C12.8831 14.9836 13.0522 14.3657 12.9899 13.7488C12.9276 13.132 12.6383 12.5603 12.1782 12.1448C11.7181 11.7292 11.12 11.4994 10.5 11.5001H9.50001C9.3674 11.5001 9.24022 11.4474 9.14645 11.3536C9.05269 11.2599 9.00001 11.1327 9.00001 11.0001C9.00001 10.8675 9.05269 10.7403 9.14645 10.6465C9.24022 10.5527 9.3674 10.5001 9.50001 10.5001ZM21 12.0001H18V3.00007C18.0007 2.82386 17.9548 2.65059 17.867 2.49781C17.7792 2.34504 17.6526 2.21817 17.5 2.13007C17.348 2.0423 17.1755 1.99609 17 1.99609C16.8245 1.99609 16.652 2.0423 16.5 2.13007L13.5 3.85007L10.5 2.13007C10.348 2.0423 10.1755 1.99609 10 1.99609C9.82447 1.99609 9.65203 2.0423 9.50001 2.13007L6.50001 3.85007L3.50001 2.13007C3.34799 2.0423 3.17554 1.99609 3.00001 1.99609C2.82447 1.99609 2.65203 2.0423 2.50001 2.13007C2.3474 2.21817 2.22079 2.34504 2.13299 2.49781C2.04518 2.65059 1.99931 2.82386 2.00001 3.00007V19.0001C2.00001 19.7957 2.31608 20.5588 2.87869 21.1214C3.4413 21.684 4.20436 22.0001 5.00001 22.0001H19C19.7957 22.0001 20.5587 21.684 21.1213 21.1214C21.6839 20.5588 22 19.7957 22 19.0001V13.0001C22 12.7349 21.8947 12.4805 21.7071 12.293C21.5196 12.1054 21.2652 12.0001 21 12.0001ZM5.00001 20.0001C4.73479 20.0001 4.48044 19.8947 4.2929 19.7072C4.10536 19.5196 4.00001 19.2653 4.00001 19.0001V4.73007L6.00001 5.87007C6.15435 5.95068 6.32589 5.99278 6.50001 5.99278C6.67413 5.99278 6.84567 5.95068 7.00001 5.87007L10 4.15007L13 5.87007C13.1543 5.95068 13.3259 5.99278 13.5 5.99278C13.6741 5.99278 13.8457 5.95068 14 5.87007L16 4.73007V19.0001C16.0027 19.3412 16.0636 19.6794 16.18 20.0001H5.00001ZM20 19.0001C20 19.2653 19.8947 19.5196 19.7071 19.7072C19.5196 19.8947 19.2652 20.0001 19 20.0001C18.7348 20.0001 18.4804 19.8947 18.2929 19.7072C18.1054 19.5196 18 19.2653 18 19.0001V14.0001H20V19.0001Z" fill="black"/>
+                                </svg>                                
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div id="txtValorNotificacoes" style="position: absolute; right: 41.49%; top: 6.9%; font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-size: 21.7143px; line-height: 26px; color: #000000;">
+                                <p><strong style="color: #000000;">R$ 27,98</strong></p>
+                            </div>
+                            <div style="position: absolute; height: 15px; right: 28.85%; top: calc(50% - 15px/2 + 9.39px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 10.8571px; line-height: 14px; color: #000000; overflow: hidden; text-overflow: ellipsis; max-width: 133px; white-space: nowrap; ">
+                                2 itens: 1x Coca  1x Açai
+                            </div>
+                            <div style="position: absolute; width: 76px; height: 13px; left: 73px; top: 71px; border: 1px solid #1B9C07; border-radius: 6.5px;">
+                                <div style="display: flex; flex-direction: row;  justify-content: space-around;">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.00006 0.833252C4.19193 0.834787 3.40168 1.0713 2.72557 1.51398C2.04947 1.95665 1.51668 2.58639 1.19212 3.32649C0.867555 4.06658 0.765218 4.88509 0.897572 5.68232C1.02993 6.47954 1.39126 7.22107 1.93756 7.81659C2.32774 8.23952 2.80129 8.57706 3.32837 8.80792C3.85545 9.03878 4.42464 9.15797 5.00006 9.15797C5.57549 9.15797 6.14467 9.03878 6.67175 8.80792C7.19884 8.57706 7.67239 8.23952 8.06256 7.81659C8.60886 7.22107 8.9702 6.47954 9.10255 5.68232C9.23491 4.88509 9.13257 4.06658 8.808 3.32649C8.48344 2.58639 7.95065 1.95665 7.27455 1.51398C6.59844 1.0713 5.8082 0.834787 5.00006 0.833252ZM5.00006 8.33325C4.13692 8.33194 3.30794 7.99587 2.68756 7.39575C2.87591 6.93723 3.19633 6.54504 3.60808 6.26904C4.01984 5.99303 4.50436 5.84567 5.00006 5.84567C5.49577 5.84567 5.98028 5.99303 6.39204 6.26904C6.8038 6.54504 7.12421 6.93723 7.31256 7.39575C6.69218 7.99587 5.8632 8.33194 5.00006 8.33325ZM4.16673 4.16659C4.16673 4.00177 4.2156 3.84065 4.30717 3.70361C4.39874 3.56657 4.52889 3.45976 4.68116 3.39669C4.83343 3.33361 5.00099 3.31711 5.16264 3.34926C5.32429 3.38142 5.47277 3.46079 5.58932 3.57733C5.70586 3.69387 5.78523 3.84236 5.81738 4.00401C5.84954 4.16566 5.83303 4.33322 5.76996 4.48549C5.70689 4.63776 5.60008 4.76791 5.46304 4.85948C5.326 4.95104 5.16488 4.99992 5.00006 4.99992C4.77905 4.99992 4.56709 4.91212 4.41081 4.75584C4.25453 4.59956 4.16673 4.3876 4.16673 4.16659ZM7.87923 6.66659C7.50695 6.02982 6.93398 5.53451 6.25006 5.25825C6.46221 5.01769 6.60045 4.72103 6.64817 4.40385C6.6959 4.08668 6.65109 3.76247 6.51912 3.47013C6.38716 3.17779 6.17364 2.92973 5.90419 2.75574C5.63474 2.58174 5.32081 2.48919 5.00006 2.48919C4.67932 2.48919 4.36538 2.58174 4.09593 2.75574C3.82648 2.92973 3.61297 3.17779 3.481 3.47013C3.34903 3.76247 3.30422 4.08668 3.35195 4.40385C3.39967 4.72103 3.53791 5.01769 3.75006 5.25825C3.06614 5.53451 2.49317 6.02982 2.12089 6.66659C1.8242 6.16121 1.66744 5.58595 1.66673 4.99992C1.66673 4.11586 2.01792 3.26802 2.64304 2.6429C3.26816 2.01777 4.11601 1.66659 5.00006 1.66659C5.88412 1.66659 6.73196 2.01777 7.35708 2.6429C7.98221 3.26802 8.3334 4.11586 8.3334 4.99992C8.33268 5.58595 8.17592 6.16121 7.87923 6.66659Z" fill="#1B9C07"/>
+                                    </svg>
+                                    <p style="height: 15px; margin-top: 0px; font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 6px; line-height: 14px; text-transform: uppercase; color: #1B9C07;">Matheus Azevedo</p>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div style="position: absolute; height: 20px; right: 3.3%; top: calc(50% - 20px/2 - 33px); font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-size: 14.6429px; line-height: 19px; color: #000000;">
+                                18:21
+                            </div>
+                            <div style="position: absolute; height: 10px; right: 3.3%; top: calc(50% - 10px/2 - 23px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 7.51931px; line-height: 10px; color: #000000;">
+                                26/07/2022
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li style="margin-top: 240px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <div style="position: absolute; width: 50px; height: 50px; left: 13px; top: 25px; background: #F5F5F5; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; display: flex; align-items: center;">
+                            <svg style="margin-left: 14px;" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.9999 11.0001C11.3571 11.0001 10.7288 11.1907 10.1943 11.5478C9.65985 11.9049 9.24329 12.4125 8.99731 13.0064C8.75132 13.6002 8.68696 14.2537 8.81237 14.8841C8.93777 15.5146 9.2473 16.0937 9.70182 16.5482C10.1563 17.0027 10.7354 17.3122 11.3659 17.4376C11.9963 17.563 12.6498 17.4987 13.2436 17.2527C13.8375 17.0067 14.3451 16.5901 14.7022 16.0557C15.0593 15.5212 15.2499 14.8929 15.2499 14.2501C15.2499 13.3881 14.9075 12.5615 14.298 11.952C13.6885 11.3425 12.8619 11.0001 11.9999 11.0001ZM11.9999 15.3334C11.7857 15.3334 11.5762 15.2699 11.398 15.1508C11.2199 15.0318 11.081 14.8626 10.999 14.6647C10.9171 14.4667 10.8956 14.2489 10.9374 14.0387C10.9792 13.8286 11.0824 13.6356 11.2339 13.484C11.3854 13.3325 11.5784 13.2294 11.7886 13.1876C11.9987 13.1458 12.2165 13.1672 12.4145 13.2492C12.6124 13.3312 12.7816 13.4701 12.9007 13.6482C13.0197 13.8264 13.0833 14.0358 13.0833 14.2501C13.0833 14.5374 12.9691 14.8129 12.766 15.0161C12.5628 15.2193 12.2872 15.3334 11.9999 15.3334ZM11.2308 8.51925C11.3338 8.61788 11.4553 8.69519 11.5883 8.74675C11.7179 8.80406 11.8581 8.83367 11.9999 8.83367C12.1417 8.83367 12.2819 8.80406 12.4116 8.74675C12.5446 8.69519 12.6661 8.61788 12.7691 8.51925L15.2499 6.08175C15.4597 5.87201 15.5775 5.58753 15.5775 5.29092C15.5775 4.99429 15.4597 4.70982 15.2499 4.50008C15.0402 4.29034 14.7557 4.17251 14.4591 4.17251C14.1625 4.17251 13.878 4.29034 13.6683 4.50008L13.0833 5.13925V1.25008C13.0833 0.962764 12.9691 0.687213 12.766 0.484049C12.5628 0.280885 12.2872 0.166748 11.9999 0.166748C11.7126 0.166748 11.437 0.280885 11.2339 0.484049C11.0307 0.687213 10.9166 0.962764 10.9166 1.25008V5.13925L10.3316 4.50008C10.1218 4.29034 9.83737 4.17251 9.54075 4.17251C9.24413 4.17251 8.95966 4.29034 8.74992 4.50008C8.54018 4.70982 8.42234 4.99429 8.42234 5.29092C8.42234 5.58753 8.54018 5.87201 8.74992 6.08175L11.2308 8.51925ZM19.5833 14.2501C19.5833 14.0358 19.5197 13.8264 19.4007 13.6482C19.2816 13.4701 19.1124 13.3312 18.9145 13.2492C18.7165 13.1672 18.4987 13.1458 18.2886 13.1876C18.0784 13.2294 17.8854 13.3325 17.7339 13.484C17.5824 13.6356 17.4792 13.8286 17.4374 14.0387C17.3956 14.2489 17.4171 14.4667 17.499 14.6647C17.581 14.8626 17.7199 15.0318 17.898 15.1508C18.0762 15.2699 18.2857 15.3334 18.4999 15.3334C18.7872 15.3334 19.0628 15.2193 19.266 15.0161C19.4691 14.8129 19.5833 14.5374 19.5833 14.2501ZM20.6666 6.66675H17.4166C17.1293 6.66675 16.8537 6.78089 16.6506 6.98405C16.4474 7.18721 16.3333 7.46276 16.3333 7.75008C16.3333 8.0374 16.4474 8.31295 16.6506 8.51611C16.8537 8.71928 17.1293 8.83342 17.4166 8.83342H20.6666C20.9539 8.83342 21.2295 8.94755 21.4326 9.15072C21.6358 9.35388 21.7499 9.62943 21.7499 9.91675V18.5834C21.7499 18.8707 21.6358 19.1463 21.4326 19.3494C21.2295 19.5526 20.9539 19.6667 20.6666 19.6667H3.33325C3.04593 19.6667 2.77038 19.5526 2.56722 19.3494C2.36405 19.1463 2.24992 18.8707 2.24992 18.5834V9.91675C2.24992 9.62943 2.36405 9.35388 2.56722 9.15072C2.77038 8.94755 3.04593 8.83342 3.33325 8.83342H6.58325C6.87057 8.83342 7.14612 8.71928 7.34928 8.51611C7.55245 8.31295 7.66658 8.0374 7.66658 7.75008C7.66658 7.46276 7.55245 7.18721 7.34928 6.98405C7.14612 6.78089 6.87057 6.66675 6.58325 6.66675H3.33325C2.4713 6.66675 1.64465 7.00916 1.03515 7.61865C0.425662 8.22814 0.083252 9.05479 0.083252 9.91675V18.5834C0.083252 19.4454 0.425662 20.272 1.03515 20.8815C1.64465 21.491 2.4713 21.8334 3.33325 21.8334H20.6666C21.5285 21.8334 22.3552 21.491 22.9647 20.8815C23.5742 20.272 23.9166 19.4454 23.9166 18.5834V9.91675C23.9166 9.05479 23.5742 8.22814 22.9647 7.61865C22.3552 7.00916 21.5285 6.66675 20.6666 6.66675ZM4.41658 14.2501C4.41658 14.4643 4.48012 14.6738 4.59916 14.8519C4.7182 15.0301 4.88739 15.169 5.08534 15.251C5.2833 15.3329 5.50112 15.3544 5.71127 15.3126C5.92141 15.2708 6.11444 15.1676 6.26595 15.0161C6.41746 14.8646 6.52064 14.6716 6.56244 14.4614C6.60424 14.2513 6.58278 14.0335 6.50079 13.8355C6.41879 13.6376 6.27994 13.4684 6.10179 13.3493C5.92363 13.2303 5.71418 13.1667 5.49992 13.1667C5.2126 13.1667 4.93705 13.2809 4.73389 13.484C4.53072 13.6872 4.41658 13.9628 4.41658 14.2501Z" fill="black"/>
+                            </svg>                   
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div id="txtValorNotificacoes" style="position: absolute; right: 41.49%; top: 6.9%; font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-size: 21.7143px; line-height: 26px; color: #000000;">
+                                <p><strong style="color: #000000;">R$ 109,99</strong></p>
+                            </div>
+                            <div style="position: absolute; height: 15px; right: 28.85%; top: calc(50% - 15px/2 + 9.39px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 10.8571px; line-height: 14px; color: #000000; overflow: hidden; text-overflow: ellipsis; max-width: 133px; white-space: nowrap; ">
+                                Recarga Pré-Pago
+                            </div>
+                            <div style="position: absolute; width: 76px; height: 13px; left: 73px; top: 71px; border: 1px solid #1B9C07; border-radius: 6.5px;">
+                                <div style="display: flex; flex-direction: row;  justify-content: space-around;">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.00006 0.833252C4.19193 0.834787 3.40168 1.0713 2.72557 1.51398C2.04947 1.95665 1.51668 2.58639 1.19212 3.32649C0.867555 4.06658 0.765218 4.88509 0.897572 5.68232C1.02993 6.47954 1.39126 7.22107 1.93756 7.81659C2.32774 8.23952 2.80129 8.57706 3.32837 8.80792C3.85545 9.03878 4.42464 9.15797 5.00006 9.15797C5.57549 9.15797 6.14467 9.03878 6.67175 8.80792C7.19884 8.57706 7.67239 8.23952 8.06256 7.81659C8.60886 7.22107 8.9702 6.47954 9.10255 5.68232C9.23491 4.88509 9.13257 4.06658 8.808 3.32649C8.48344 2.58639 7.95065 1.95665 7.27455 1.51398C6.59844 1.0713 5.8082 0.834787 5.00006 0.833252ZM5.00006 8.33325C4.13692 8.33194 3.30794 7.99587 2.68756 7.39575C2.87591 6.93723 3.19633 6.54504 3.60808 6.26904C4.01984 5.99303 4.50436 5.84567 5.00006 5.84567C5.49577 5.84567 5.98028 5.99303 6.39204 6.26904C6.8038 6.54504 7.12421 6.93723 7.31256 7.39575C6.69218 7.99587 5.8632 8.33194 5.00006 8.33325ZM4.16673 4.16659C4.16673 4.00177 4.2156 3.84065 4.30717 3.70361C4.39874 3.56657 4.52889 3.45976 4.68116 3.39669C4.83343 3.33361 5.00099 3.31711 5.16264 3.34926C5.32429 3.38142 5.47277 3.46079 5.58932 3.57733C5.70586 3.69387 5.78523 3.84236 5.81738 4.00401C5.84954 4.16566 5.83303 4.33322 5.76996 4.48549C5.70689 4.63776 5.60008 4.76791 5.46304 4.85948C5.326 4.95104 5.16488 4.99992 5.00006 4.99992C4.77905 4.99992 4.56709 4.91212 4.41081 4.75584C4.25453 4.59956 4.16673 4.3876 4.16673 4.16659ZM7.87923 6.66659C7.50695 6.02982 6.93398 5.53451 6.25006 5.25825C6.46221 5.01769 6.60045 4.72103 6.64817 4.40385C6.6959 4.08668 6.65109 3.76247 6.51912 3.47013C6.38716 3.17779 6.17364 2.92973 5.90419 2.75574C5.63474 2.58174 5.32081 2.48919 5.00006 2.48919C4.67932 2.48919 4.36538 2.58174 4.09593 2.75574C3.82648 2.92973 3.61297 3.17779 3.481 3.47013C3.34903 3.76247 3.30422 4.08668 3.35195 4.40385C3.39967 4.72103 3.53791 5.01769 3.75006 5.25825C3.06614 5.53451 2.49317 6.02982 2.12089 6.66659C1.8242 6.16121 1.66744 5.58595 1.66673 4.99992C1.66673 4.11586 2.01792 3.26802 2.64304 2.6429C3.26816 2.01777 4.11601 1.66659 5.00006 1.66659C5.88412 1.66659 6.73196 2.01777 7.35708 2.6429C7.98221 3.26802 8.3334 4.11586 8.3334 4.99992C8.33268 5.58595 8.17592 6.16121 7.87923 6.66659Z" fill="#1B9C07"/>
+                                    </svg>
+                                    <p style="height: 15px; margin-top: 0px; font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 6px; line-height: 14px; text-transform: uppercase; color: #1B9C07;">Matheus Azevedo</p>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <div style="position: absolute; height: 20px; right: 3.3%; top: calc(50% - 20px/2 - 33px); font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-size: 14.6429px; line-height: 19px; color: #000000;">
+                                18:21
+                            </div>
+                            <div style="position: absolute; height: 10px; right: 3.3%; top: calc(50% - 10px/2 - 23px); font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size: 7.51931px; line-height: 10px; color: #000000;">
+                                26/07/2022
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </section>
         <div id="containerConteudo">
             <div id="IdentificaoCliente">
                 <div class="informacoesCliente">
@@ -849,12 +1021,12 @@
                             <h5> CONSULTA DE SALDO </h5>
                             <div class="saldoDebito">
                                 <p> Débito </p>
-                                <i class="fa fa-eye" onclick="escondeSaldo(this)"></i>
+                                <i class="fa fa-eye" style="cursor: pointer;" onclick="escondeSaldo(this)"></i>
                                 <p> R$ <span> 1.000.000 </span></p>
                             </div>
                             <div class="saldoCredito">
                                 <p> Crédito </p>
-                                <i class="fa fa-eye" onclick="escondeSaldo(this)"></i>
+                                <i class="fa fa-eye" style="cursor: pointer;" onclick="escondeSaldo(this)"></i>
                                 <p> R$ <span> 4.000.000 </span> </p>
                             </div>
                         </div>
@@ -899,9 +1071,20 @@
                                 <p style="color:var(--corSecundaria); font-weight: 500; margin-top: -15px;">RUA PROFESSOR CLEMENTINO DE BRITO, 455 - CAPOEIRAS</p>
                                 <p style="color:var(--corSecundaria); font-weight: 500; margin-top: -15px;">FLORIANOPOLIS/SC - CEP: 88070-150 - Fone:(48) 9 9919-8061</p>
                             </div>
-                            <p style="color: var(--corSecundaria); width: 86%; margin-top: -25rem; margin-left: 48px;">************************************************************************************</p>
+                            <p style="color: var(--corSecundaria); width: 86%; margin-left: 48px;">************************************************************************************</p>
                             <div id="itensComanda">
-                                <table style="width: 98%;">
+                                <table id="tablePrincipal" style="width: 98%;">
+                                    <tr>
+                                        <th style="text-align: center; font-size: 10.19px; font-weight: 500;">Data</th>
+                                        <th style="text-align: center; font-size: 10.19px; font-weight: 500;">Hora</th>
+                                        <th style="text-align: center; font-size: 10.19px; font-weight: 500;">NSU</th>
+                                        <th style="text-align: center; font-size: 10.19px; font-weight: 500;">Valor</th>
+                                    </tr>
+                                </table>
+                                <tbody> </tbody>
+                            </div>
+                            <div id="comandaProdutos" class="d-none">
+                                <table id="tableSecundaria" class="d-none" style="width: 98%;">
                                     <tr>
                                         <th style="font-size: 10.19px; font-weight: 500;">Descrição</th>
                                         <th style="text-align: right; font-size: 10.19px; font-weight: 500;">Qtd.</th>
@@ -926,30 +1109,25 @@
             </div>
             <div id="todosOsProdutos">
                 <div class="cabecalhoProdutos">
-                    <form class="buscaProdutos">
-                        <input class="itensBuscaProdutos" style="width: 25%; padding-left: 1%" id="autoComplete" placeholder="Pesquise pelo Produto" value="">
+                    <div class="buscaProdutos">
+                        <input class="itensBuscaProdutos" style="width: 25%; padding-left: 1%" id="autoComplete" placeholder="Pesquise pelo Produto">
                         <input class="itensBuscaProdutos" style="width: 25%; padding-left: 1%;" id="codigoBarras" type="text" placeholder="Cod. Barras">
-                        <input class="itensBuscaProdutos" style="width: 14%; padding-left: 1%;" id="qntdProduto" type="text" placeholder="Qntd">
-                        <button class="itensBuscaProdutos" id="adcProduto"> ADICIONAR PRODUTOS </button>
-                    </form>
+                        <input class="itensBuscaProdutos" style="width: 14%; padding-left: 1%;" type="text" placeholder="Qntd">
+                        <button class="itensBuscaProdutos"> ADICIONAR PRODUTOS </button>
+                    </div>
                     <div class="produtosFavoritos">
                         <i class="far fa-star"></i>
                         <p> PRODUTOS FAVORITOS </p>
                     </div>
                 </div>
-                <div class="containerProdutos"> </div>
-                <div class="filtroCategorias">
-                    <div class="categorias"> COMIDA </div>
-                    <div class="categorias"> BEBIDA </div>
-                    <div class="categorias"> DOCES </div>
-                    <div class="categorias"> REFRIS </div>
-                    <div class="iconeFiltro"> <i class="fa-solid fa-filter"></i> </div>
+                <div class="containerProdutos">
                 </div>
                 <div class="footerProdutos"></div>
             </div>
+
         <!-- <button style="position: absolute; left: 50%; top: 50%" id="btn">Abrir modal</button> -->
     </main>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
