@@ -23,6 +23,11 @@
         line-height: 130%;
     }
 
+    @font-face{
+        font-family: digital;
+        src: url("./fonte/DS-DIGIT.TTF"); 
+    }
+
     :root {
         --corPrimaria: #FFF;
         --corSecundaria: #0465B2;
@@ -524,11 +529,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.5rem;
+        font-size: 2rem;
         border: none;
         cursor: pointer;
         color: black;
         background-color: #BCBABA;
+        font-family: digital;
     }
 
     .teclado button i {
@@ -550,6 +556,7 @@
         border: none;
         cursor: pointer;
         background-color: var(--corBotoesSecundarios);
+        margin-bottom: 2vw;
     }
 
     .footerComanda button {
@@ -662,7 +669,7 @@
 
     .containerProdutos {
         width: 100%;
-        height: 85%;
+        height: 80%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -813,7 +820,7 @@
     }
 
     .d-none{
-        display: none;
+        display: none !important;
     }
 
     .containerFiltros {
@@ -853,6 +860,7 @@
         cursor: pointer;
         margin-left: 80%;
         transition: .5s;
+        margin-bottom: 2vw;
     }
 
     .rotate {
@@ -862,17 +870,24 @@
     .valorSendoDigitado {
         width: 100%;
         height: 50%;
-        background-color: red;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .valorSendoDigitado input {
-        width: 80%;
+        width: 60%;
         height: 50%;
+        padding-left: 3.5vw;
         background-color: aqua;
         font-size: 3em;
+        border-radius: 10px;
+        font-family: digital;
+    }
+
+    .cabecalhoCancelamento{
+        background-color: #FF820F !important;
+        height: 22%;
     }
 </style>
 
@@ -1069,10 +1084,7 @@
                     <div class="conteudoIdentificacaoCliente">
                         <input type="search" name="identificarCliente" id="identificarCliente" placeholder="CPF/NÚMERO CARTÃO/CELULAR/E-MAIL/ID. EXTRA">
                         <p style="text-align: center;"> IDENTIFIQUE O CLIENTE </p>
-                        <div class="valorSendoDigitado">
-                            <input type="text">
-                        </div>
-                        <!-- <div class="infoCliente infoClienteAndConsultaSaldo d-none">
+                        <div class="infoCliente infoClienteAndConsultaSaldo d-none">
                             <div class="imgCliente">
                                 <img src="https://conteudo.imguol.com.br/c/esporte/aa/2022/11/24/richarlison-comemora-seu-gol-pela-selecao-brasileira-na-estreia-da-copa-contra-a-servia-1669322080562_v2_900x506.jpg.webp" alt="">
                             </div>
@@ -1081,7 +1093,10 @@
                                 <div class="cpfCliente"> CPF: 101.864.449-07</div>
                             </div>
                         </div>
-                        <div class="consultaDeSaldo infoClienteAndConsultaSaldo d-none">
+                        <div class="valorSendoDigitado d-none">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                        </div>
+                        <!--<div class="consultaDeSaldo infoClienteAndConsultaSaldo d-none">
                             <h5> CONSULTA DE SALDO </h5>
                             <div class="saldoDebito">
                                 <p> Débito </p>
@@ -1097,18 +1112,18 @@
                     </div>
                 </div>
                 <div class="teclado">
-                    <button onclick="inputCliente(this)" value="7">7</button>
-                    <button onclick="inputCliente(this)" value="8">8</button>
-                    <button onclick="inputCliente(this)" value="9">9</button>
-                    <button onclick="inputCliente(this)" value="4">4</button>
-                    <button onclick="inputCliente(this)" value="5">5</button>
-                    <button onclick="inputCliente(this)" value="6">6</button>
-                    <button onclick="inputCliente(this)" value="1">1</button>
-                    <button onclick="inputCliente(this)" value="2">2</button>
-                    <button onclick="inputCliente(this)" value="3">3</button>
-                    <button onclick="apagaCpfCliente()" value="apagar" style="background-color: #DFDADA; color: #FF0000;">C</button>
-                    <button onclick="inputCliente(this)" value="0">0</button>
-                    <button onclick="identificaCliente()" value="concluir" style="background-color: #DFDADA;"><i style="color: #1B9C07;" class="fa fa-level-down-alt fa-rotate-90"></i></button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="7">7</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="8">8</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="9">9</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="4">4</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="5">5</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="6">6</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="1">1</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="2">2</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="3">3</button>
+                    <button class="btnClear" onclick="apagaCpfCliente()" value="apagar" style="background-color: #DFDADA; color: #FF0000;">C</button>
+                    <button class="btnsTeclado" onclick="inputCliente(this)" value="0">0</button>
+                    <button onclick="identificaCliente(this)" value="concluir" style="background-color: #DFDADA;"><i style="color: #1B9C07;" class="fa fa-level-down-alt fa-rotate-90"></i></button>
                 </div>
                 <div class="containerFecharVenda">
                     <button onclick="chamarFuncao('meioPagamento');"> Fechar Venda </button>
@@ -1168,7 +1183,7 @@
                     <div id="footerNota" style="width: 100%; margin-top: 1vh; display: flex; justify-content: space-between; align-items: center;">
                         <button style="background-color: #0F52FF;"> MINHAS VENDAS</button> <!-- n sei / talvez redirecionar pro relatorio -->
                         <button style="background-color: #FF820F;"> REIMPRESSÃO </button> <!-- n sei -->
-                        <button style="background-color: #FF0F0F;"> CANCELAMENTO </button> <!-- aq vai limpar a comanda -->
+                        <button style="background-color: #FF0F0F;" onclick="chamarFuncao('cancelamento')"> CANCELAMENTO </button> <!-- aq vai limpar a comanda -->
                     </div>
             </div>
             <div id="todosOsProdutos">
