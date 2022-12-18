@@ -667,6 +667,7 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        position: relative;
         flex-wrap: wrap;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -814,6 +815,45 @@
     .d-none{
         display: none;
     }
+
+    .containerFiltros {
+        width: 200px;
+        position: absolute;
+        top: 17vw;
+        left: 25vh;
+        box-sizing: border-box;
+    }
+
+    .containerFiltros ul {
+        width: 100%;
+        padding: 0px;
+        list-style: none;
+    }
+
+    .containerFiltros ul li {
+        width: 100%;
+        padding: 4px;
+        padding-left: 4px;
+        cursor: pointer;
+        background-color: #0465B2;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        /* transform: rotate(180deg) */
+    }
+
+    .containerFiltros div {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--corBotoesSecundarios);
+        border-radius: 50%;
+        font-size: 1.4em;
+        cursor: pointer;
+        margin-left: 80%;
+    }
+
 
 </style>
 
@@ -1008,7 +1048,8 @@
                     </div>
                     <div class="conteudoIdentificacaoCliente">
                         <input type="search" name="identificarCliente" id="identificarCliente" placeholder="CPF/NÚMERO CARTÃO/CELULAR/E-MAIL/ID. EXTRA">
-                        <div class="infoCliente">
+                        <p style="text-align: center;"> IDENTIFIQUE O CLIENTE </p>
+                        <div class="infoCliente infoClienteAndConsultaSaldo d-none">
                             <div class="imgCliente">
                                 <img src="https://conteudo.imguol.com.br/c/esporte/aa/2022/11/24/richarlison-comemora-seu-gol-pela-selecao-brasileira-na-estreia-da-copa-contra-a-servia-1669322080562_v2_900x506.jpg.webp" alt="">
                             </div>
@@ -1017,7 +1058,7 @@
                                 <div class="cpfCliente"> CPF: 101.864.449-07</div>
                             </div>
                         </div>
-                        <div class="consultaDeSaldo">
+                        <div class="consultaDeSaldo infoClienteAndConsultaSaldo d-none">
                             <h5> CONSULTA DE SALDO </h5>
                             <div class="saldoDebito">
                                 <p> Débito </p>
@@ -1033,18 +1074,18 @@
                     </div>
                 </div>
                 <div class="teclado">
-                    <button value="7">7</button>
-                    <button value="8">8</button>
-                    <button value="9">9</button>
-                    <button value="4">4</button>
-                    <button value="5">5</button>
-                    <button value="6">6</button>
-                    <button value="1">1</button>
-                    <button value="2">2</button>
-                    <button value="3">3</button>
-                    <button value="apagar" style="background-color: #DFDADA; color: #FF0000;">C</button>
-                    <button value="0">0</button>
-                    <button value="concluir" style="background-color: #DFDADA;"><i style="color: #1B9C07;" class="fa fa-level-down-alt fa-rotate-90"></i></button>
+                    <button onclick="inputCliente(this)" value="7">7</button>
+                    <button onclick="inputCliente(this)" value="8">8</button>
+                    <button onclick="inputCliente(this)" value="9">9</button>
+                    <button onclick="inputCliente(this)" value="4">4</button>
+                    <button onclick="inputCliente(this)" value="5">5</button>
+                    <button onclick="inputCliente(this)" value="6">6</button>
+                    <button onclick="inputCliente(this)" value="1">1</button>
+                    <button onclick="inputCliente(this)" value="2">2</button>
+                    <button onclick="inputCliente(this)" value="3">3</button>
+                    <button onclick="apagaCpfCliente()" value="apagar" style="background-color: #DFDADA; color: #FF0000;">C</button>
+                    <button onclick="inputCliente(this)" value="0">0</button>
+                    <button onclick="identificaCliente()" value="concluir" style="background-color: #DFDADA;"><i style="color: #1B9C07;" class="fa fa-level-down-alt fa-rotate-90"></i></button>
                 </div>
                 <div class="containerFecharVenda">
                     <button onclick="chamarFuncao('meioPagamento');"> Fechar Venda </button>
@@ -1112,7 +1153,7 @@
                     <div class="buscaProdutos">
                         <input class="itensBuscaProdutos" style="width: 25%; padding-left: 1%" id="autoComplete" placeholder="Pesquise pelo Produto">
                         <input class="itensBuscaProdutos" style="width: 25%; padding-left: 1%;" id="codigoBarras" type="text" placeholder="Cod. Barras">
-                        <input class="itensBuscaProdutos" style="width: 14%; padding-left: 1%;" type="text" placeholder="Qntd">
+                        <input class="itensBuscaProdutos" style="width: 14%; padding-left: 1%;" id="qntdProduto" type="text" placeholder="Qntd">
                         <button class="itensBuscaProdutos"> ADICIONAR PRODUTOS </button>
                     </div>
                     <div class="produtosFavoritos">
@@ -1121,6 +1162,21 @@
                     </div>
                 </div>
                 <div class="containerProdutos">
+                    <div class="containerFiltros">
+                        <ul class="">
+                            <li> BEBIDAS </li>
+                            <li> DOCES </li>
+                            <li> SALGADOS </li>
+                            <li> GELADOS </li>
+                            <li> PERECIVEIS </li>
+                            <li> PERECIVEIS </li>
+                            <li> PERECIVEIS </li>
+                            <li> PERECIVEIS </li>
+                            <div>
+                                <i class="fa-solid fa-x"></i>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
                 <div class="footerProdutos"></div>
             </div>
