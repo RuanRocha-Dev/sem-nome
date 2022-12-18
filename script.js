@@ -32148,9 +32148,7 @@ let produtos = [
     }
     ]
     
-    
-    
-    
+    let clienteIdentificado = 0;
     
     function abreModal (title, cont, posicaoTitulo = null, conteudoBtnAcao = null, tamanhoBotãoAcao = false) {
         const modal = document.querySelector("dialog");
@@ -32180,27 +32178,31 @@ let produtos = [
                 document.querySelector(".cabecalho").style = 'justify-content: flex-start';
                 titulo.style = 'padding-left: 25px';
                 btnModal.style = 'top: 25%';
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 break;
             case 2:  // ficara apenas o titulo centralizado no cabeçalho, com o botão de fechar embaixo 
                 btnModal.style = 'display: none';
                 const btnFechar = document.createElement("button");
                 btnFechar.innerHTML = `${conteudoBtnAcao}`;
                 btnFechar.style = `width: 110px; height: 33px; position: absolute; top: 82%; border-radius: 8px; left: 41%; background-color: var(--corSecundaria); border: none; cursor: pointer; ${tamanhoBotãoAcao}`;
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 conteudo.appendChild(btnFechar);
                 break;
             case 3:  // ficara com o titulo no meio do cabeçalho e o botão de fechar no mesmo lugar e tambem com um botão de ação ao final do modal 
                 const btnFechar3 = document.createElement("button");
                 btnFechar3.innerHTML = `${conteudoBtnAcao}`;
                 btnFechar3.style = `width: 110px; height: 33px; position: absolute; top: 82%; border-radius: 8px; left: 41%; background-color: var(--corSecundaria); border: none; cursor: pointer; ${tamanhoBotãoAcao}`;
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 conteudo.appendChild(btnFechar3);
                 break;
             case 4:  // titulo ficara centralizado com o botão de fechar no mesmo lugar e sem botão de ação.
                 titulo.style = 'padding-left: 25px';
                 btnModal.style = 'top: 25%';
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 break;
             case 5:  // ficara apenas o titulo centralizado no cabeçalho, com o botão de fechar embaixo **a diferença desse pro case 2 é a borda e o botao de fechar centralizado 
                 btnModal.style = 'display: none';
@@ -32208,8 +32210,12 @@ let produtos = [
                 btnFechar5.innerHTML = `${conteudoBtnAcao}`;
                 modal.style = 'padding:0; border:none; border-radius:31px;'
                 btnFechar5.style = `width: 110px; height: 33px; position: absolute; top: 82%; border-radius: 8px; left: 37%; background-color: var(--corSecundaria); border: none; cursor: pointer; ${tamanhoBotãoAcao}`;
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 conteudo.appendChild(btnFechar5);
+                btnFechar5.addEventListener("click", () => {
+                    modal.close();
+                })
                 break;
             case 6:  // titulo ficara colado na esquerda e botao de acao em baixo
                 document.querySelector(".cabecalho").style = 'justify-content: flex-start';
@@ -32218,7 +32224,8 @@ let produtos = [
                 btnModal.style = 'top: 25%';
                 btnFechar6.innerHTML = `${conteudoBtnAcao}`;
                 btnFechar6.style = `width: 110px; height: 33px; position: absolute; top: 82%; border-radius: 8px; left: 41%; background-color: var(--corSecundaria); border: none; cursor: pointer; ${tamanhoBotãoAcao}`;
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 conteudo.appendChild(btnFechar6);
                 break;
             case 7:  // titulo ficara colado na esquerda e botao de acao canto inferior direito
@@ -32228,9 +32235,34 @@ let produtos = [
                 btnModal.style = 'top: 25%';
                 btnFechar7.innerHTML = `${conteudoBtnAcao}`;
                 btnFechar7.style = `width: 110px; height: 33px; position: absolute; top: 82%; border-radius: 8px; left: 78%; background-color: red; border: none; cursor: pointer; ${tamanhoBotãoAcao}`;
-                modal.style = ''
+                modal.style = '';
+                divCabecalho.classList.remove('cabecalhoCancelamento');
                 conteudo.appendChild(btnFechar7);
+                btnFechar7.addEventListener("click", () => {
+                    modal.close();
+                })
                 break;
+            case 8:  // modal de cancelamento
+                const btnConfirm = document.createElement("button");
+                const btnCancel = document.createElement("button");
+                divCabecalho.classList.add('cabecalhoCancelamento')
+                btnModal.style = 'display: none';
+                btnConfirm.innerHTML = `Sim, tenho certeza!`;
+                btnCancel.innerHTML = `Não`;
+                btnConfirm.style = `display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 14px 20px; gap: 10px; position: absolute; width: 180px; height: 44px; left: 425px; top: 80px; background: #FF0F0F; border-radius: 8px; border:none; cursor:pointer;`;
+                btnCancel.style = `color: black; box-sizing: border-box; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 14px 20px; gap: 10px; position: absolute; width: 180px; height: 44px; left: 230px; top: 80px; background: #FFFFFF; border: 1px solid #4F4F4F; border-radius: 8px; cursor:pointer;`;
+                modal.style = 'position: absolute; width: 625px; height: 203px; left: 0px; top: 0px; background: #FFFFFF; border: 1px solid #DEE2E6; border-radius: 8px;'
+                conteudo.appendChild(btnConfirm);
+                conteudo.appendChild(btnCancel);
+                btnCancel.addEventListener("click", () => {
+                    modal.close();
+                })
+                btnConfirm.addEventListener("click", () => {
+                    limparVenda();
+                    modal.close();
+                })
+                break;
+
     
             default:
                 break;
@@ -32514,6 +32546,11 @@ let produtos = [
                 </div>
             </div>
         </div>`
+
+        let cancelamento = `
+        <div>
+            <p style="height: 65px; font-style: normal; font-weight: 500; font-size: 20.5135px; line-height: 32px; text-align: center; color: #000000;">Tem certeza que dejesa cancelar essa venda?<br> Ao cancelar, não será possivel desfazer essa ação!</p>
+        </div>`;
     
         // <div style="display:flex"; flex-direction:row;>
         //                 <p style="color:var(--corPrimaria); position: absolute; width: 70px; height: 18px; left: 40px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Benefício</p>
@@ -32607,7 +32644,7 @@ let produtos = [
     
         conteudo.innerHTML += `${cont}`;
     
-        modal.style = 'padding: 20px 40px; gap: 24px; position: absolute; width: 472px; height: 293px; left: 0px; top: 0px; background: #FFFFFF; border: 1px solid #DEE2E6; border-radius: 8px;'
+        modal.style = 'padding: 20px 40px; gap: 24px; position: absolute; width: 472px; height: 293px; left: 0px; top: 0px; background: var(--corPrimaria); border-radius: 8px;'
         
         btnModal.addEventListener("click", () => {
             modal.close();
@@ -32691,37 +32728,41 @@ let produtos = [
     function chamarFuncao(funcao){
         switch (funcao) {
             case 'cadastroRapido':
-            autoCadastro(cadastroRapido);
-            break;
+                autoCadastro(cadastroRapido);
+                break;
             
             case 'convite':
-            modalConvite(convite);
-            break;
+                modalConvite(convite);
+                break;
     
             case 'qrCode':
-            abreModal('QR Code', qrCode, 5, 'Fechar', false);
-            break;
+                abreModal('QR Code', qrCode, 5, 'Fechar', false);
+                break;
     
             case 'resgatePremio':
-            abreModal('Resgatar Prêmios', resgatePremio, 7, 'CANCELAR', false);
-            break;
+                abreModal('Resgatar Prêmios', resgatePremio, 7, 'CANCELAR', false);
+                break;
     
             case 'recargaPrePago':
-            abreModal('Selecione o tipo de senha', selecioneTipoSenha, 4)
-            break;
+                abreModal('Selecione o tipo de senha', selecioneTipoSenha, 4)
+                break;
     
             case 'meioPagamento':
-            abreModal('Meio de Pagamento', meioDePagamento, 1, 'CONCLUIR', true);
-            break;
+                abreModal('Meio de Pagamento', meioDePagamento, 1, 'CONCLUIR', true);
+                break;
     
             case 'resgateBeneficios':
-            abreModal('Resgate de Benefícios', resgateBeneficio, 1);
-            break;
+                abreModal('Resgate de Benefícios', resgateBeneficio, 1);
+                break;
             // (title, cont, posicaoTitulo = null, conteudoBtnAcao = null, tamanhoBotãoAcao = false)
     
             case 'aplicarDesconto':
-            abreModal('Desconto', selecioneDesconto, 6, 'CONCLUIR', true);
-            break;
+                abreModal('Desconto', selecioneDesconto, 6, 'CONCLUIR', true);
+                break;
+
+            case 'cancelamento':
+                abreModal('ALERTA DE CANCELAMENTO', cancelamento, 8);
+                break;
     
             default:
             break;
@@ -32873,9 +32914,10 @@ let produtos = [
         document.querySelector('#identificarCliente').value = valor += el.value;
     }
 
-    function identificaCliente () { // função para identificar o cliente ao clicar no botão correspondente no teclado
+    function identificaCliente (elemento) { // função para identificar o cliente ao clicar no botão correspondente no teclado
         const inputIdentificacao = document.querySelector('#identificarCliente');
         const tituloIdentificacao = document.querySelector('.conteudoIdentificacaoCliente p');
+        const recebeValorDigitado = document.querySelector('.valorSendoDigitado');
 
         let cpf = '10186444907';
         let celular = '48991896913';
@@ -32886,12 +32928,48 @@ let produtos = [
 
         if(valorInput == cpf || valorInput == celular || valorInput == numeroCartao || valorInput == email) {
             tituloIdentificacao.classList.add('d-none');
-            // document.querySelectorAll('.infoClienteAndConsultaSaldo').forEach(e => e.classList.remove('d-none'));
+            document.querySelector('.infoClienteAndConsultaSaldo').classList.remove('d-none');
+            recebeValorDigitado.classList.remove('d-none');
+            elemento.removeAttribute('onclick');
+            elemento.setAttribute('onclick', 'adicionaValorCarrinho()');
+            document.querySelectorAll('.teclado .btnsTeclado').forEach(e => {
+                e.removeAttribute('onclick');
+                e.setAttribute('onclick', 'insereValorDigitado(this)');
+            })
+            document.querySelector('.btnClear').removeAttribute('onclick');
+            document.querySelector('.btnClear').setAttribute('onclick', 'limpaInputValoresDigitados()');
+            clienteIdentificado = 1;
         } else {
             tituloIdentificacao.innerHTML = 'CLIENTE NÃO ENCONTRADO';
             tituloIdentificacao.classList.remove('d-none');
-            // document.querySelectorAll('.infoClienteAndConsultaSaldo').forEach(e => e.classList.add('d-none'));
+            document.querySelector('.infoClienteAndConsultaSaldo').classList.add('d-none');
+            recebeValorDigitado.classList.add('d-none');
+            elemento.removeAttribute('onclick');
+            elemento.setAttribute('onclick', 'identificaCliente(this)');
+            document.querySelectorAll('.teclado .btnsTeclado').forEach(e => {
+                e.removeAttribute('onclick');
+                e.setAttribute('onclick', "inputCliente(this)");
+            })
+            document.querySelector('.btnClear').removeAttribute('onclick');
+            document.querySelector('.btnClear').setAttribute('onclick', 'apagaCpfCliente()');
+            clienteIdentificado = 0;
         }
+
+        inputIdentificacao.addEventListener('click', () => {
+            tituloIdentificacao.innerHTML = 'CLIENTE NÃO ENCONTRADO';
+            tituloIdentificacao.classList.remove('d-none');
+            document.querySelector('.infoClienteAndConsultaSaldo').classList.add('d-none');
+            recebeValorDigitado.classList.add('d-none');
+            elemento.removeAttribute('onclick');
+            elemento.setAttribute('onclick', 'identificaCliente(this)');
+            document.querySelectorAll('.teclado .btnsTeclado').forEach(e => {
+                e.removeAttribute('onclick');
+                e.setAttribute('onclick', "inputCliente(this)");
+            })
+            document.querySelector('.btnClear').removeAttribute('onclick');
+            document.querySelector('.btnClear').setAttribute('onclick', 'apagaCpfCliente()');
+            clienteIdentificado = 0;
+        })
 
         valor = '';
     }
@@ -32914,7 +32992,41 @@ let produtos = [
             e.classList.toggle('animate__animated');
         })
     }
-    
+
+    let valorVendadigitada = '';
+
+    function insereValorDigitado (elemento) {
+        const campoValor = document.querySelector('.valorSendoDigitado input');
+        campoValor.value = valorVendadigitada += elemento.value;
+    }
+
+    function limpaInputValoresDigitados () {
+        valorVendadigitada = '';
+        document.querySelector('.valorSendoDigitado input').value = '';
+    }
+
+
+    let totalDaCompra = '';
+    function adicionaValorCarrinho () {
+        const tbodyProdutos = document.querySelector("#tablePrincipal tbody");
+        const valorInput = document.querySelector('.valorSendoDigitado input');
+        const valorTotal = document.querySelector('.footerComanda span');
+
+        let data = new Date().toLocaleDateString();
+        let horario = new Date().toLocaleTimeString().slice(0, -3);
+        let nsu = '000000000000200';
+        
+        tbodyProdutos.innerHTML += `<tr class="trProd">
+                                        <td style="max-width: 105px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"> ${data} </td>
+                                        <td style="text-align: right; position: relative"> ${horario} </td>
+                                        <td style="text-align: right;" id="valorProduto"> ${nsu} </td>
+                                        <td style="text-align: right;" id="totalValorProduto"> ${valorInput.value} </td>
+                                    </tr>`;
+
+        totalDaCompra = Number(valorInput.value) + Number(totalDaCompra);
+
+        valorTotal.innerHTML = totalDaCompra;
+    }    
     
     
     
