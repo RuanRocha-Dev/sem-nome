@@ -32149,6 +32149,7 @@ let produtos = [
     ]
     
     let clienteIdentificado = 0;
+    let vendaSemProduto = 1;
     
     function abreModal (title, cont, posicaoTitulo = null, conteudoBtnAcao = null, tamanhoBotãoAcao = false) {
         const modal = document.querySelector("dialog");
@@ -32258,7 +32259,15 @@ let produtos = [
                     modal.close();
                 })
                 btnConfirm.addEventListener("click", () => {
-                    limparVenda();
+                    if(vendaSemProduto == 1) {
+                        document.querySelectorAll('#tablePrincipal .trProd').forEach(e => e.remove());
+                        document.querySelector('.footerComanda span').textContent = '0';
+                        document.querySelector('.footerComanda span').value = '0';
+                    } else {
+                        document.querySelectorAll('#tableSecundaria .trProd').forEach(e => e.remove());
+                        document.querySelector('.footerComanda span').textContent = '0';
+                        document.querySelector('.footerComanda span').value = '0';
+                    }
                     modal.close();
                 })
                 break;
@@ -32551,6 +32560,40 @@ let produtos = [
         <div>
             <p style="height: 65px; font-style: normal; font-weight: 500; font-size: 20.5135px; line-height: 32px; text-align: center; color: #000000;">Tem certeza que dejesa cancelar essa venda?<br> Ao cancelar, não será possivel desfazer essa ação!</p>
         </div>`;
+
+        let relatorio =`
+        <div style="width: 996px; height: 570px; left: 0px; top: 0px; background: #FFFFFF;">
+            <div style="width: 955px; height: 540px; margin-left: 1vw; margin-top: 1vw; background: #E9E9E9; border: 1.5px solid #0465B2; border-radius: 14.38px;">
+                <div style="width: 955px; height: 40.27px; left: 15px; top: 78px; background: #0465B2; border-radius: 14.3825px 14.3825px 0px 0px;">
+                    <table style="width: 98%;">
+                        <tr style="height: 35px;">
+                            <th style="color: var(--corPrimaria); position: absolute; width: 139px; height: 18px; left: 40px; top: 12px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Data Da Transação</th>
+                            <th style="color: var(--corPrimaria); position: absolute; width: 164px; height: 18px; left: 300px; top: 12px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Forma De Pagamento</th>
+                            <th style="color:var(--corPrimaria);position: absolute; width: 93px; height: 18px; left: 576px; top:12px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Cpf CLiente</th>
+                            <th style="color:var(--corPrimaria); position: absolute; width: 37px; height: 18px; left: 867px; top:12px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Valor</th>
+                        </tr>
+                        <tr>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 93%; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">18/12/2022</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 131px; height: 18px; left: 355px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">PIX</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; left: 560px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">122.354.459-18</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; right: 19px; text-align:center;">R$ 125,98</td>
+                        </tr> 
+                        <tr>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 93%; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 80px;">18/12/2022</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 131px; height: 18px; left: 305px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 80px;">Cartão de Crédito</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; left: 560px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 80px;">122.354.459-18</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; right: 19px; text-align:center; top: 80px;">R$ 55,98</td>
+                        </tr> 
+                        <tr>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 93%; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 120px;">18/12/2022</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 131px; height: 18px; left: 337px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 120px;">Qr Code</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; left: 560px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; top: 120px;">122.354.459-18</td>
+                            <td style="color:var(--corSecundaria); position: absolute; width: 149px; height: 18px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px; right: 19px; text-align:center; top: 120px;">R$ 527,98</td>
+                        </tr> 
+                    </table>
+                </div>
+            </div>
+        </div>`;
     
         // <div style="display:flex"; flex-direction:row;>
         //                 <p style="color:var(--corPrimaria); position: absolute; width: 70px; height: 18px; left: 40px; font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-size: 14.5554px; line-height: 18px;">Benefício</p>
@@ -32764,6 +32807,9 @@ let produtos = [
                 abreModal('ALERTA DE CANCELAMENTO', cancelamento, 8);
                 break;
     
+            case 'relatorio':
+                abreModal('Relatório', relatorio, 1);
+            break;
             default:
             break;
     }
@@ -32794,8 +32840,21 @@ let produtos = [
     idsProdutosInseridos = [];
     
     function addProduto (el, id, estoque) { // função que adiciona o produto no 'carrinho' na div central NOTA/CUPOM
+        if(vendaSemProduto == 1) {
+            const telaProdutos = document.querySelector('#comandaProdutos');
+            const tableTelaProdutos = document.querySelector('#comandaProdutos table');
+            const telaVendaSemprodutos = document.querySelector('#itensComanda');
+            const tableTelaVendaSemprodutos = document.querySelector('#itensComanda table');
+
+            vendaSemProduto = 0;
+            telaProdutos.classList.remove('d-none');
+            tableTelaProdutos.classList.remove('d-none');
+            telaVendaSemprodutos.classList.add('d-none');
+            tableTelaVendaSemprodutos.classList.add('d-none');
+        }
+
         if (idsProdutosInseridos.includes(id)) {
-            const elemento = document.querySelector(`#itensComanda #item${id}`);
+            const elemento = document.querySelector(`#comandaProdutos #item${id}`);
             somaValorQuantidade(elemento, estoque);
             return false;
         }
@@ -32808,7 +32867,7 @@ let produtos = [
         const quantosProdutos = document.querySelector("#qntdProduto").value;
         
         let qntdProduto = quantosProdutos != '' ? quantosProdutos : '1';
-        const tbodyProdutos = document.querySelector("#itensComanda tbody");
+        const tbodyProdutos = document.querySelector("#comandaProdutos tbody");
         tbodyProdutos.innerHTML += `<tr class="trProd">
                                         <td style="max-width: 105px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"> ${descricao} </td>
                                         <td style="text-align: right; position: relative"><i onclick="somaValorQuantidade(this, ${estoque})" class="fa-solid fa-plus" style="left: 2rem;"></i> <span id="item${id}"> ${qntdProduto} </span> <i onclick="subtraiValorQuantidade(this, ${id}, ${estoque})" class="fa-solid fa-minus" style="left: 4.4rem;"></i></td>
@@ -32818,7 +32877,6 @@ let produtos = [
     
         const valorTotal = document.querySelector(".footerComanda span");
         valorTotal.innerHTML = Number(valorTotal.textContent) + Number(valorProd); 
-
     }
     
     function somaValorQuantidade (el, estoque) {  // função que soma no campo 'SUBTOTAL', ao clicar em adicionar mais unidades do mesmo produto somara no subtotal
@@ -32846,13 +32904,6 @@ let produtos = [
         
         const total = document.querySelector(".footerComanda span");
     
-        if (Number(quantidadeProduto.textContent) <= 1) {
-            let removido = idsProdutosInseridos.indexOf(id);
-            idsProdutosInseridos.splice(removido, 1);
-            el.closest(".trProd").remove();
-            return false;
-        }
-    
         quantidadeProduto.innerHTML = Number(quantidadeProduto.textContent) - 1;
     
         const valorUnitario = Number(el.closest(".trProd").querySelector("#valorProduto").textContent);
@@ -32864,6 +32915,12 @@ let produtos = [
     
         let totalAtual = Number(total.textContent) - valorUnitario;
         total.innerHTML = totalAtual;
+
+        if (Number(quantidadeProduto.textContent) < 1) {
+            let removido = idsProdutosInseridos.indexOf(id);
+            idsProdutosInseridos.splice(removido, 1);
+            el.closest(".trProd").remove();
+        }
     }
 
     function abreFechaNotificacao(){
@@ -33008,6 +33065,19 @@ let produtos = [
 
     let totalDaCompra = '';
     function adicionaValorCarrinho () {
+        if(vendaSemProduto == 0) {
+            const telaProdutos = document.querySelector('#comandaProdutos');
+            const tableTelaProdutos = document.querySelector('#comandaProdutos table');
+            const telaVendaSemprodutos = document.querySelector('#itensComanda');
+            const tableTelaVendaSemprodutos = document.querySelector('#itensComanda table');
+            
+            vendaSemProduto = 1;
+            telaProdutos.classList.add('d-none');
+            tableTelaProdutos.classList.add('d-none');
+            telaVendaSemprodutos.classList.remove('d-none');
+            tableTelaVendaSemprodutos.classList.remove('d-none');
+        }
+
         const tbodyProdutos = document.querySelector("#tablePrincipal tbody");
         const valorInput = document.querySelector('.valorSendoDigitado input');
         const valorTotal = document.querySelector('.footerComanda span');
@@ -33026,6 +33096,10 @@ let produtos = [
         totalDaCompra = Number(valorInput.value) + Number(totalDaCompra);
 
         valorTotal.innerHTML = totalDaCompra;
+
+        valorInput.value = '';
+        valorInput.focus();
+        valorVendadigitada = '';
     }    
     
     
